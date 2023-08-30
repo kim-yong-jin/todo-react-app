@@ -39,14 +39,18 @@ export function signin(userDTO) {
     .then((response) => {
       if (response.token) {
         // 로컬 스토리지에 토큰 저장
-        sessionStorage.setItem("ACCESS_TOKEN", response.token);
+        localStorage.setItem("ACCESS_TOKEN", response.token);
         // token이 존재하는 경우 Todo 화면으로 리디렉트
         window.location.href = "/";
       }  
     });
 }
 
-export function signout(){
-  sessionStorage.setItem("ACCESS_TOKEN", null);
-  window.location.href = "/";
+export function signout() {
+  localStorage.setItem("ACCESS_TOKEN", null);
+  window.location.href = "/login";
+}
+
+export function signup(userDTO) {
+  return call("/auth/signup", "POST", userDTO);
 }
